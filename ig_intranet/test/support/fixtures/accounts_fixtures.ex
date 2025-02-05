@@ -34,4 +34,19 @@ defmodule IgIntranet.AccountsFixtures do
 
     post
   end
+
+  @doc """
+  Generate a message.
+  """
+  def message_fixture(attrs \\ %{}) do
+    {:ok, message} =
+      attrs
+      |> Enum.into(%{
+        author: "some author",
+        description: "some description"
+      })
+      |> IgIntranet.Accounts.create_message()
+
+    message
+  end
 end

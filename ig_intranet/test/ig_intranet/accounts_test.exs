@@ -125,4 +125,60 @@ defmodule IgIntranet.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_post(post)
     end
   end
+
+  describe "messages" do
+    alias IgIntranet.Accounts.Message
+
+    import IgIntranet.AccountsFixtures
+
+    @invalid_attrs %{description: nil, author: nil}
+
+    test "list_messages/0 returns all messages" do
+      message = message_fixture()
+      assert Accounts.list_messages() == [message]
+    end
+
+    test "get_message!/1 returns the message with given id" do
+      message = message_fixture()
+      assert Accounts.get_message!(message.id) == message
+    end
+
+    test "create_message/1 with valid data creates a message" do
+      valid_attrs = %{description: "some description", author: "some author"}
+
+      assert {:ok, %Message{} = message} = Accounts.create_message(valid_attrs)
+      assert message.description == "some description"
+      assert message.author == "some author"
+    end
+
+    test "create_message/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_message(@invalid_attrs)
+    end
+
+    test "update_message/2 with valid data updates the message" do
+      message = message_fixture()
+      update_attrs = %{description: "some updated description", author: "some updated author"}
+
+      assert {:ok, %Message{} = message} = Accounts.update_message(message, update_attrs)
+      assert message.description == "some updated description"
+      assert message.author == "some updated author"
+    end
+
+    test "update_message/2 with invalid data returns error changeset" do
+      message = message_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_message(message, @invalid_attrs)
+      assert message == Accounts.get_message!(message.id)
+    end
+
+    test "delete_message/1 deletes the message" do
+      message = message_fixture()
+      assert {:ok, %Message{}} = Accounts.delete_message(message)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_message!(message.id) end
+    end
+
+    test "change_message/1 returns a message changeset" do
+      message = message_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_message(message)
+    end
+  end
 end
