@@ -77,7 +77,11 @@ defmodule IgIntranet.AccountsTest do
     end
 
     test "create_post/1 with valid data creates a post" do
-      valid_attrs = %{description: "some description", username: "some username", email: "some email"}
+      valid_attrs = %{
+        description: "some description",
+        username: "some username",
+        email: "some email"
+      }
 
       assert {:ok, %Post{} = post} = Accounts.create_post(valid_attrs)
       assert post.description == "some description"
@@ -91,7 +95,12 @@ defmodule IgIntranet.AccountsTest do
 
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
-      update_attrs = %{description: "some updated description", username: "some updated username", email: "some updated email"}
+
+      update_attrs = %{
+        description: "some updated description",
+        username: "some updated username",
+        email: "some updated email"
+      }
 
       assert {:ok, %Post{} = post} = Accounts.update_post(post, update_attrs)
       assert post.description == "some updated description"

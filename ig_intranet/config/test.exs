@@ -31,7 +31,6 @@ env_db_dbname =
     Example: my_app_website_dev
     """
 
-
 config :ig_intranet, IgIntranet.Repo,
   username: env_db_user,
   password: env_db_passwd,
