@@ -1,6 +1,5 @@
 import Config
 
-
 # env vars
 env_db_user =
   System.get_env("POSTGRES_USR") ||
@@ -27,6 +26,7 @@ env_db_dbname =
     environment variable POSTGRES_DBNAME is missing.
     Example: my_app_website_dev
     """
+
 # Configure your database
 config :ig_intranet, IgIntranet.Repo,
   username: env_db_user,

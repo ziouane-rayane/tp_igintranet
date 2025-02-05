@@ -58,4 +58,71 @@ defmodule IgIntranet.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
+
+  describe "posts" do
+    alias IgIntranet.Accounts.Post
+
+    import IgIntranet.AccountsFixtures
+
+    @invalid_attrs %{description: nil, username: nil, email: nil}
+
+    test "list_posts/0 returns all posts" do
+      post = post_fixture()
+      assert Accounts.list_posts() == [post]
+    end
+
+    test "get_post!/1 returns the post with given id" do
+      post = post_fixture()
+      assert Accounts.get_post!(post.id) == post
+    end
+
+    test "create_post/1 with valid data creates a post" do
+      valid_attrs = %{
+        description: "some description",
+        username: "some username",
+        email: "some email"
+      }
+
+      assert {:ok, %Post{} = post} = Accounts.create_post(valid_attrs)
+      assert post.description == "some description"
+      assert post.username == "some username"
+      assert post.email == "some email"
+    end
+
+    test "create_post/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_post(@invalid_attrs)
+    end
+
+    test "update_post/2 with valid data updates the post" do
+      post = post_fixture()
+
+      update_attrs = %{
+        description: "some updated description",
+        username: "some updated username",
+        email: "some updated email"
+      }
+
+      assert {:ok, %Post{} = post} = Accounts.update_post(post, update_attrs)
+      assert post.description == "some updated description"
+      assert post.username == "some updated username"
+      assert post.email == "some updated email"
+    end
+
+    test "update_post/2 with invalid data returns error changeset" do
+      post = post_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_post(post, @invalid_attrs)
+      assert post == Accounts.get_post!(post.id)
+    end
+
+    test "delete_post/1 deletes the post" do
+      post = post_fixture()
+      assert {:ok, %Post{}} = Accounts.delete_post(post)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_post!(post.id) end
+    end
+
+    test "change_post/1 returns a post changeset" do
+      post = post_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_post(post)
+    end
+  end
 end

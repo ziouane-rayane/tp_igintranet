@@ -18,4 +18,20 @@ defmodule IgIntranet.AccountsFixtures do
 
     user
   end
+
+  @doc """
+  Generate a post.
+  """
+  def post_fixture(attrs \\ %{}) do
+    {:ok, post} =
+      attrs
+      |> Enum.into(%{
+        description: "some description",
+        email: "some email",
+        username: "some username"
+      })
+      |> IgIntranet.Accounts.create_post()
+
+    post
+  end
 end
