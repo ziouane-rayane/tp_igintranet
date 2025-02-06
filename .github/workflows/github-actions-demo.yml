@@ -2,14 +2,26 @@ name: check PR title
 on: 
   pull_request:
     types: [opened, edited, review_requested, ready_for_review]
-jobs:
-  build: 
-    runs-on: ubuntu-latest
 
+env:
+  PR_TITLE: ${{ github.event.pull_request.title }}
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v4
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - run: python -m pip install --upgrade pip
-      - name: PR title check
-        run: python .github/workflows/script.py "${{ github.event.pull_request.title }}"
+
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: PR title verification
+        run: python .github/workflows/script.py "$PR_TITLE"
+
