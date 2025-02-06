@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Check 
         run:
-          PR_title=${{ github.event.pull_request.title}}
-          REGEX="/ITN-[0-9]+ feat|test|scaffold|fix|docs|ops|refactor|perf|style|upgrade\(([A-Za-z]+( [A-Za-z]+)+)\)/g"
+          PR_title="${{ github.event.pull_request.title}}"
+          REGEX='ITN-[0-9]+ feat|test|scaffold|fix|docs|ops|refactor|perf|style|upgrade\(([A-Za-z]+( [A-Za-z]+)+)\)/g"
 
           if [[ ! "$PR_title" == $REGEX ]]; then
             echo "Le titre de la PR ne correspond pas au format ITN-X tag(desc)"
