@@ -16,4 +16,6 @@ jobs:
           if [[ ! "$PR_title" =~ $REGEX ]]; then
             echo "Le titre de la PR ne correspond pas au format ITN-X tag(desc)"
             exit 1
+          else 
+            echo "le titre de la PR est valide"
           fi
