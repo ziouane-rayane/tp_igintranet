@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [pull_request, pull_request_review, issue_comment, pull_request_review_comment]
   pull_request:
-    types: [opened, edited, review_requested, ready_for_review]
+    types: [opened, edited, review_requested, ready_for_review, issue_comment]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
