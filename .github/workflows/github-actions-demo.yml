@@ -1,10 +1,10 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [pull_request, pull_request_review, issue_comment, pull_request_review_comment]
+on: [pull_request_review, pull_request_review_comment]
   pull_request:
     types: [opened, edited, review_requested, ready_for_review, issue_comment]
 jobs:
-  Explore-GitHub-Actions:
+  pull_request title check:
     runs-on: ubuntu-latest
     steps:
-      - run: {{ github.event.pull_request.title == "TN-[0-9]+ feat|test|scaffold|fix|docs|ops|refactor|perf|style|upgrade(([A-Za-z]+( [A-Za-z]+)+))/g"}}
+      - run: {{ github.event.pull_request.title == "ITN-[0-9]+ feat|test|scaffold|fix|docs|ops|refactor|perf|style|upgrade(([A-Za-z]+( [A-Za-z]+)+))/g"}}
