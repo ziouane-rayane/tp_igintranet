@@ -7,4 +7,4 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: {{ github.event.pull_request.title == "ITN-2"}}
+      - run: {{ github.event.pull_request.title == "TN-[0-9]+ feat|test|scaffold|fix|docs|ops|refactor|perf|style|upgrade(([A-Za-z]+( [A-Za-z]+)+))/g"}}
