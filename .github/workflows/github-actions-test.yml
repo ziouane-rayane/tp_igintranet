@@ -18,7 +18,6 @@ jobs:
         ports: ['5432:5432']
         env:
             POSTGRES_USR: admin
-            POSTGRES_PASSWORD: postgres_passwd
             POSTGRES_PASSWD: postgres_passwd
             POSTGRES_HOSTNAME: localhost
             POSTGRES_DBNAME: frixel_bootstrap_dev
