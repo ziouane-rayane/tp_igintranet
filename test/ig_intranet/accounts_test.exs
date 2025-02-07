@@ -38,7 +38,7 @@ defmodule IgIntranet.AccountsTest do
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.name == "some updated name"
-      assert user.age == 42
+      assert user.age == 43
     end
 
     test "update_user/2 with invalid data returns error changeset" do
