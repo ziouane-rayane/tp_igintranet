@@ -10,7 +10,7 @@ env_db_user =
 env_db_passwd =
   System.get_env("POSTGRES_PASSWORD") ||
     raise """
-    environment variable POSTGRES_PASSWD is missing.
+    environment variable POSTGRES_PASSWORD is missing.
     """
 
 env_db_hostname =
