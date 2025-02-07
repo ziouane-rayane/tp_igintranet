@@ -1,4 +1,7 @@
 defmodule IgIntranet.Accounts.User do
+  @moduledoc """
+  Account user
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

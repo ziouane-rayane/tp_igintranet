@@ -1,0 +1,94 @@
+name: Elixir CI
+
+env: 
+  POSTGRES_PASSWORD: postgres_passwd
+  POSTGRES_USER: admin
+  POSTGRES_HOSTNAME: localhost
+  POSTGRES_DBNAME: frixel_bootstrap_dev
+
+on: 
+  push:
+    branches: ["ITN-2_feat(add_mix_test)"]
+  pull_request:
+    branches: ["ITN-2_feat(add_mix_test)"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    services:
+      db:
+        image: postgres:latest
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres_passwd
+          POSTGRES_USER: admin
+          POSTGRES_HOSTNAME: localhost
+          POSTGRES_DBNAME: frixel_bootstrap_dev
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opt: ['27.0']
+        elixir: ['1.18.1']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: ${{matrix.elixir}} # [Required] Define the Elixir version
+        otp-version: ${{matrix.opt}}      # [Required] Define the Erlang/OTP version
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run tests
+      run: mix test
+
+  credo:
+    name: mix_credo
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opt: ['27.0']
+        elixir: ['1.18.1']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: ${{matrix.elixir}} # [Required] Define the Elixir version
+        otp-version: ${{matrix.opt}}      # [Required] Define the Erlang/OTP version
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run credo
+      run: mix credo 
+
+  code-format:
+    name: Mix format --check-formatted
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opt: ['27.0']
+        elixir: ['1.18.1']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: ${{matrix.elixir}} # [Required] Define the Elixir version
+        otp-version: ${{matrix.opt}}      # [Required] Define the Erlang/OTP version
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run format
+      run: mix format --check-formatted

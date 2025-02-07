@@ -2,15 +2,15 @@ import Config
 
 # env vars
 env_db_user =
-  System.get_env("POSTGRES_USR") ||
+  System.get_env("POSTGRES_USER") ||
     raise """
-    environment variable POSTGRES_USR is missing.
+    environment variable POSTGRES_USER is missing.
     """
 
 env_db_passwd =
-  System.get_env("POSTGRES_PASSWD") ||
+  System.get_env("POSTGRES_PASSWORD") ||
     raise """
-    environment variable POSTGRES_PASSWD is missing.
+    environment variable POSTGRES_PASSWORD is missing.
     """
 
 env_db_hostname =

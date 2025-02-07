@@ -1,4 +1,7 @@
 defmodule IgIntranet.Accounts.Post do
+  @moduledoc """
+  Account Post
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

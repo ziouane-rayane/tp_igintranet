@@ -1,4 +1,7 @@
 defmodule IgIntranetWeb.MonTest do
+  @moduledoc """
+  basic unit test
+  """
   def hello_world do
     IO.puts("hello")
     IO.puts("hey")

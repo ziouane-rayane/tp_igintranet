@@ -1,4 +1,7 @@
 defmodule IgIntranet.Accounts.Message do
+  @moduledoc """
+  Account Message
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -6,15 +6,15 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 env_db_user =
-  System.get_env("POSTGRES_USR") ||
+  System.get_env("POSTGRES_USER") ||
     raise """
-    environment variable POSTGRES_USR is missing.
+    environment variable POSTGRES_USER is missing.
     """
 
 env_db_passwd =
-  System.get_env("POSTGRES_PASSWD") ||
+  System.get_env("POSTGRES_PASSWORD") ||
     raise """
-    environment variable POSTGRES_PASSWD is missing.
+    environment variable POSTGRES_PASSWORD is missing.
     """
 
 env_db_hostname =
@@ -38,6 +38,7 @@ config :ig_intranet, IgIntranet.Repo,
   hostname: env_db_hostname,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
+  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,
