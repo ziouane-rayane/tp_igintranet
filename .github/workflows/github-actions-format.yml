@@ -54,4 +54,4 @@ jobs:
             mix deps.get
 
       - name: Check Formatting
-        run: mix format
+        run: mix format --check-formatted
