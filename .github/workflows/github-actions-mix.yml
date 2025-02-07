@@ -3,7 +3,6 @@ name: Elixir CI
 env:
   POSTGRES_PASSWORD: postgres_passwd
   POSTGRES_USR: admin
-  POSTGRES_PASSWD: postgres_passwd
   POSTGRES_HOSTNAME: localhost
   POSTGRES_DBNAME: frixel_bootstrap_dev
 
@@ -23,7 +22,7 @@ jobs:
         image: postgres:latest
         ports: ['5432:5432']
         env:
-          POSTGRES_PASSWORD: "$POSTGRES_PASSWD"
+          POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
           POSTGRES_USR: "$POSTGRES_USR"
           POSTGRES_HOSTNAME: "$POSTGRES_HOSTNAME"
           POSTGRES_DBNAME: "$POSTGRES_DBNAME"
