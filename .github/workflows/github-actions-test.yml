@@ -6,7 +6,6 @@ on:
 env:
   MIX_ENV: test
   POSTGRES_USR: admin
-  POSTGRES_PASSWD: postgres_passwd
   POSTGRES_HOSTNAME: localhost
   POSTGRES_DBNAME: frixel_bootstrap_dev
 
@@ -21,7 +20,13 @@ jobs:
           image: postgres:12
           ports: ['5432:5432']
           env:
-            POSTGRES_PASSWD: postgres_passwd
+            POSTGRES_PASSWRD: postgres_passwd
+            MIX_ENV: test
+            POSTGRES_USR: admin
+            POSTGRES_HOSTNAME: localhost
+            POSTGRES_DBNAME: frixel_bootstrap_dev
+          
+            PHX_HOST: localhost
           options: >-
             --health-cmd pg_isready
             --health-interval 10s
