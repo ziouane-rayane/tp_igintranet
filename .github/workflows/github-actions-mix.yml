@@ -11,6 +11,17 @@ permissions:
 
 jobs:
   build:
+    services:
+      db:
+        image: postgres:latest
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres_passwd
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     name: Build and Test
     runs-on: ubuntu-latest
     strategy:
