@@ -7,6 +7,7 @@ env:
   MIX_ENV: test
   POSTGRES_USR: admin
   POSTGRES_HOSTNAME: localhost
+  POSTGRES_PASSWRD: postgres_passwd
   POSTGRES_DBNAME: frixel_bootstrap_dev
 
   PHX_HOST: localhost
@@ -23,6 +24,7 @@ jobs:
             POSTGRES_PASSWORD: postgres_passwd
             MIX_ENV: test
             POSTGRES_USR: admin
+            POSTGRES_PASSWRD: postgres_passwd
             POSTGRES_HOSTNAME: localhost
             POSTGRES_DBNAME: frixel_bootstrap_dev
           
