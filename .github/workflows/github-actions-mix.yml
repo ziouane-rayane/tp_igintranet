@@ -49,9 +49,25 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
-      env: 
-        POSTGRES_PASSWORD: postgres_passwd
-        POSTGRES_USER: admin
-        POSTGRES_HOSTNAME: localhost
-        POSTGRES_DBNAME: frixel_bootstrap_dev
       run: mix test
+
+  credo:
+    name: mix_credo
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opt: ['27.0']
+        elixir: ['1.18.1']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: ${{matrix.elixir}} # [Required] Define the Elixir version
+        otp-version: ${{matrix.opt}}      # [Required] Define the Erlang/OTP version
+    - name: Install dependencies
+      run: mix deps.gets
+    - name: Mix credo
+      run: mix credo 

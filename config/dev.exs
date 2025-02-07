@@ -4,7 +4,7 @@ import Config
 env_db_user =
   System.get_env("POSTGRES_USER") ||
     raise """
-    environment variable POSTGRES_USR is missing.
+    environment variable POSTGRES_USER is missing.
     """
 
 env_db_passwd =
