@@ -3,15 +3,11 @@ on:
   push:
   pull_request:
 
-env:
-  MIX_ENV: test
-  POSTGRES_USR: admin
+env: 
+  POSTGRES_PASSWORD: postgres_passwd
+  POSTGRES_USER: admin
   POSTGRES_HOSTNAME: localhost
-  POSTGRES_PASSWRD: postgres_passwd
   POSTGRES_DBNAME: frixel_bootstrap_dev
-
-  PHX_HOST: localhost
-
 
 
 jobs:
@@ -22,13 +18,9 @@ jobs:
           ports: ['5432:5432']
           env:
             POSTGRES_PASSWORD: postgres_passwd
-            MIX_ENV: test
-            POSTGRES_USR: admin
-            POSTGRES_PASSWRD: postgres_passwd
+            POSTGRES_USER: admin
             POSTGRES_HOSTNAME: localhost
             POSTGRES_DBNAME: frixel_bootstrap_dev
-          
-            PHX_HOST: localhost
           options: >-
             --health-cmd pg_isready
             --health-interval 10s
