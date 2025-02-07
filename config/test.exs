@@ -38,7 +38,7 @@ config :ig_intranet, IgIntranet.Repo,
   hostname: env_db_hostname,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
-
+  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,
