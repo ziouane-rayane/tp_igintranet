@@ -2,7 +2,7 @@ name: Elixir CI
 
 env: 
   POSTGRES_PASSWORD: postgres_passwd
-  POSTGRES_USR: admin
+  POSTGRES_USER: admin
   POSTGRES_HOSTNAME: localhost
   POSTGRES_DBNAME: frixel_bootstrap_dev
 
@@ -23,7 +23,7 @@ jobs:
         ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: postgres_passwd
-          POSTGRES_USR: admin
+          POSTGRES_USER: admin
           POSTGRES_HOSTNAME: localhost
           POSTGRES_DBNAME: frixel_bootstrap_dev
         options: >-
@@ -51,7 +51,7 @@ jobs:
     - name: Run tests
       env: 
         POSTGRES_PASSWORD: postgres_passwd
-        POSTGRES_USR: admin
+        POSTGRES_USER: admin
         POSTGRES_HOSTNAME: localhost
         POSTGRES_DBNAME: frixel_bootstrap_dev
       run: mix test
