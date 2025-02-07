@@ -20,7 +20,7 @@ jobs:
           image: postgres:12
           ports: ['5432:5432']
           env:
-            POSTGRES_PASSWRD: postgres_passwd
+            POSTGRES_PASSWORD: postgres_passwd
             MIX_ENV: test
             POSTGRES_USR: admin
             POSTGRES_HOSTNAME: localhost
