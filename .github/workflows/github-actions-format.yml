@@ -5,6 +5,7 @@ on:
 
 env:
   MIX_ENV: test
+  
 
 jobs:
   build:
@@ -41,7 +42,9 @@ jobs:
         shell: sh
 
       - name: install dependencies
-        run: mix deps.get
+        run: |
+            set -a && source .env && set +a
+            mix deps.get
 
       - name: Check Formatting
         run: mix format
