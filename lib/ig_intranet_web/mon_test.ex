@@ -1,6 +1,6 @@
 defmodule IgIntranetWeb.MonTest do
   def hello_world do
-      IO.puts("hello")
+    IO.puts("hello")
     IO.puts("hey")
   end
 
