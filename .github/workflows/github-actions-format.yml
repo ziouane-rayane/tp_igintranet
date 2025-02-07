@@ -36,6 +36,7 @@ jobs:
             elixir-version: ${{matrix.elixir}}
 
       - name: clean deps
+        if: github.run_attempt != '1'
         run: |
             mix deps.clean --all
             mix clean
