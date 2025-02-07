@@ -6,10 +6,6 @@ on:
 env:
   MIX_ENV: test
 
-permissions:
-  contents: read
-
-
 jobs:
   build:
     services:
@@ -29,6 +25,8 @@ jobs:
         otp: ['27.2']       
         elixir: ['1.18.1']
     steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
