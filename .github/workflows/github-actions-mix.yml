@@ -1,11 +1,5 @@
 name: Elixir CI
 
-env:
-  POSTGRES_PASSWORD: postgres_passwd
-  POSTGRES_USR: admin
-  POSTGRES_HOSTNAME: localhost
-  POSTGRES_DBNAME: frixel_bootstrap_dev
-
 on: 
   push:
     branches: ["ITN-2_feat(add_mix_test)"]
@@ -22,10 +16,10 @@ jobs:
         image: postgres:latest
         ports: ['5432:5432']
         env:
-          POSTGRES_PASSWORD: "$POSTGRES_PASSWORD"
-          POSTGRES_USR: "$POSTGRES_USR"
-          POSTGRES_HOSTNAME: "$POSTGRES_HOSTNAME"
-          POSTGRES_DBNAME: "$POSTGRES_DBNAME"
+          POSTGRES_PASSWORD: postgres_passwd
+          POSTGRES_USR: admin
+          POSTGRES_HOSTNAME: localhost
+          POSTGRES_DBNAME: frixel_bootstrap_dev
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -49,4 +43,9 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
+      env: 
+        POSTGRES_PASSWORD: postgres_passwd
+        POSTGRES_USR: admin
+        POSTGRES_HOSTNAME: localhost
+        POSTGRES_DBNAME: frixel_bootstrap_dev
       run: mix test
