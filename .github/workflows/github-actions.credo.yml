@@ -1,0 +1,57 @@
+name: credo  
+on: 
+  push:
+  pull_request:
+
+env:
+  MIX_ENV: test
+  POSTGRES_USR: admin
+  POSTGRES_PASSWD: postgres_passwd
+  POSTGRES_HOSTNAME: localhost
+  POSTGRES_DBNAME: frixel_bootstrap_dev
+
+  PHX_HOST: localhost
+
+
+
+jobs:
+  format:
+    services:
+      db:
+          image: postgres:12
+          ports: ['5432:5432']
+          env:
+            POSTGRES_PASSWORD: postgres
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        otp: ['27.2']       
+        elixir: ['1.18.1']
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+            otp-version: ${{matrix.otp}}
+            elixir-version: ${{matrix.elixir}}
+
+      - name: clean deps
+        if: github.run_attempt != '1'
+        run: |
+            mix deps.clean --all
+            mix clean
+        shell: sh
+
+      - name: install dependencies
+        run: |
+            set -a && source .env && set +a
+            mix deps.get
+
+      - name: Check credo
+        run: mix credo
